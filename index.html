@@ -8,10 +8,11 @@
       name="description"
       content="Premium custom-coded digital experiences built for speed, conversion, and lasting growth."
     />
-    <script src="https://tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
     <script>
       tailwind.config = {
         theme: {
@@ -29,159 +30,6 @@
         }
       };
     </script>
-    <style>
-      :root {
-        color-scheme: dark;
-      }
-
-      body {
-        font-family: "Cormorant Garamond", Georgia, serif;
-        background: #060816;
-        overflow-x: hidden;
-        letter-spacing: 0.02em;
-      }
-
-      h1, h2, h3, h4, h5, h6, p, a, span, div {
-        font-family: "Cormorant Garamond", Georgia, serif;
-        letter-spacing: 0.02em;
-      }
-
-      canvas#bg {
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        display: block;
-      }
-
-      .glass {
-        background: rgba(27, 13, 18, 0.7);
-        backdrop-filter: blur(18px);
-      }
-
-      .pricing-wrap {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.5rem;
-        align-items: stretch;
-      }
-
-      .pricing-card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-height: 100%;
-        border: 1px solid rgba(148, 163, 184, 0.2);
-        background: rgba(15, 23, 42, 0.72);
-        border-radius: 1.5rem;
-        padding: 2rem 1.5rem;
-        box-shadow: 0 18px 45px rgba(2, 6, 23, 0.18);
-      }
-
-      .pricing-card ul {
-        list-style: none;
-        padding: 0;
-        margin: 1.5rem 0 1.5rem;
-        display: grid;
-        gap: 0.9rem;
-      }
-
-      .pricing-card.popular {
-        border-color: rgba(239, 68, 68, 0.75);
-        background: linear-gradient(180deg, rgba(38, 12, 16, 0.94), rgba(15, 23, 42, 0.84));
-        transform: translateY(-8px);
-        box-shadow: 0 22px 60px rgba(239, 68, 68, 0.18);
-      }
-
-      .pricing-badge {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.45);
-        color: #fecaca;
-        font-size: 0.7rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        padding: 0.45rem 0.7rem;
-        border-radius: 999px;
-      }
-
-      .pricing-card h3 {
-        margin: 0;
-        font-size: 1.8rem;
-        color: #fff;
-      }
-
-      .price-tag {
-        margin-top: 0.75rem;
-        font-size: 0.82rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: #fca5a5;
-      }
-
-      .price-value {
-        margin-top: 0.5rem;
-        font-size: 2.2rem;
-        color: #fff;
-      }
-
-      .pricing-card li {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.65rem;
-        color: #dbe2ec;
-        line-height: 1.6;
-      }
-
-      .pricing-card li::before {
-        content: "✓";
-        color: #f87171;
-        font-weight: 700;
-        margin-top: 0.1rem;
-      }
-
-      .pricing-btn {
-        display: inline-block;
-        width: 100%;
-        margin-top: auto;
-        padding: 0.9rem 1.2rem;
-        border-radius: 999px;
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        background: linear-gradient(135deg, #ef4444, #be123c);
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .pricing-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 25px rgba(239, 68, 68, 0.22);
-      }
-
-      .pricing-note {
-        margin-top: 1.25rem;
-        text-align: center;
-        font-size: 0.8rem;
-        color: #a1a1aa;
-      }
-
-      @media (max-width: 768px) {
-        .pricing-wrap {
-          grid-template-columns: 1fr;
-        }
-
-        .pricing-card.popular {
-          transform: none;
-        }
-      }
-    </style>
   </head>
   <body class="min-h-screen text-slate-100 antialiased">
     <canvas id="bg"></canvas>
@@ -375,35 +223,6 @@
       </footer>
     </div>
 
-    <script>
-      const c = document.getElementById('bg'),
-            ctx = c.getContext('2d'),
-            dpr = Math.min(window.devicePixelRatio || 1, 2);
-      let w, h, particles;
-      function resize(){
-        w = c.width = innerWidth * dpr;
-        h = c.height = innerHeight * dpr;
-        ctx.setTransform(dpr,0,0,dpr,0,0);
-        const cols = Math.floor(innerWidth / 70), rows = Math.floor(innerHeight / 70);
-        particles = Array.from({length: 16}, () => ({x: Math.random()*innerWidth, y: Math.random()*innerHeight, vx:(Math.random()-.5)*0.2, vy:(Math.random()-.5)*0.2, r: Math.random()*1.8+0.8}));
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'rgba(248,113,113,0.12)';
-      }
-      function draw(){
-        ctx.clearRect(0,0,innerWidth,innerHeight);
-        ctx.strokeStyle = 'rgba(248,113,113,0.12)';
-        for(let x=0;x<=innerWidth;x+=70){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,innerHeight);ctx.stroke();}
-        for(let y=0;y<=innerHeight;y+=70){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(innerWidth,y);ctx.stroke();}
-        particles.forEach(p=>{
-          p.x += p.vx; p.y += p.vy;
-          if(p.x < -10 || p.x > innerWidth + 10) p.vx *= -1;
-          if(p.y < -10 || p.y > innerHeight + 10) p.vy *= -1;
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle = 'rgba(251,113,133,0.9)'; ctx.shadowBlur = 12; ctx.shadowColor = 'rgba(239,68,68,0.8)'; ctx.fill();
-        });
-        requestAnimationFrame(draw);
-      }
-      resize(); draw(); addEventListener('resize', resize);
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
-
